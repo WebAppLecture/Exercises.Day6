@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<title>Lösung zur 30. Aufgabe</title>
+<style>
+html
+{
+	height: 100%;
+	overflow: hidden;
+}
+body
+{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(top, #FF0, #F0F);
+}
+body > article
+{
+	padding: 10px;
+	width: 580px;
+	height: 380px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	margin-left: -300px;
+	border: 1px solid #CCC;
+	box-shadow: 3px 3px 3px #222;
+	border-radius: 5px 10px 15px;
+	background-image: linear-gradient(bottom right, #EEE, #FFF);
+	color: rgb(112, 112, 112);
+	text-shadow: 1px 1px 1px #FF0;
+	font-family: "Segoe UI Light", "Segoe UI", "Lucida Grande", "Verdana", "Arial", "Helvetica", sans-serif;
+	font-size: 36px;
+	font-weight: 400;
+	transition: all 5s ease;
+}
+body > article:hover { transform: rotate(45deg); }
+address, time { display: inline; }
+footer { position: absolute; bottom: 10px; left: 10px; }
+/* Neues Styling für die Liste */
+ul
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+li
+{
+	display: inline;
+	margin-right: 1em;
+}
+</style>
+<!-- PreFixFree einbinden! -->
+<script src="Aufgabe30.prefixfree.js"></script>
+</head>
+<body>
+<article>
+<!-- Anfang der Liste -->
+<ul>
+<li>Dies ist Unterpunkt eins.</li>
+<li>Und das hier ist Unterpunkt Nummer zwei.</li>
+<li>Und weils so schön ist nochmal ein Unterpunkt!</li>
+</ul>
+<!-- Ende der Liste -->
+</article>
+<footer>&copy; <address>Florian Rappl</address>. Zuletzt aktualisiert am <time datetime="2011-11-14T20:19Z">14.11.2011 um 21:19</time></footer>
+</body>
+</html>

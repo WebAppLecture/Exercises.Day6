@@ -1,0 +1,194 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<title>Lösung zur 27. Aufgabe</title>
+<style>
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, non-serif; /* Legt Schriftart für Dokument fest */
+	font-size: 14px; /* Legt Schriftgröße für Dokument fest */
+}
+/* Legen die Controls fest */
+#controls
+{
+	padding: 20px; /* Ein wenig innerer Abstand */
+	margin: 0 auto; /* horizontal zentriert ausgerichtet */
+	width: 400px; /* Breite von 400 Pixeln */
+	background: #F8F8F8; /* Leicht Grauer Hintergrund */
+	border-radius: 0 0 10px 10px; /* Unten abgerundet */
+}
+/* Legen den Container fest */
+#container
+{
+	height: 500px;
+	border-bottom: 1px solid #CCC;
+	padding: 20px;
+}
+/* Das beschreibt das Design der Balken */
+div.bar
+{
+	position: relative; /* Trick damit sich die eingefügten Balken in diesen Balken ausrichten */
+	width: 100px; /* Definieren die Breite */
+	height: 500px;
+	margin-right: 20px; /* Abstand von 20px nach rechts d.h. jeder hat 20 px Abstand */
+	border: 1px solid #AAA; /* Ein wenig Rahmen */
+	display: inline-block; /* Es soll sich um Inline-Blöcke handeln - daher brauchen wir keine floats oder sonstigen Geschichten */
+	vertical-align: bottom; /* Die Ausrichtung erfolgt vom Boden */
+	overflow: hidden; /* Kein Überhang wird zugelassen */
+	box-shadow: 2px 2px 2px #666; /* Ein wenig Schatten (Design ...) */
+	text-align: center;
+	text-shadow: 1px 1px 2px #FFF;
+}
+/* Das beschreibt das Design der eingefügten (also angehängten) Balken */
+div.append
+{
+	position: absolute; /* Absolute Ausrichtung (z.B. unten) */
+	display: block; /* Blockstil */
+	border: 0; /* Rahmenlos */
+	font-weight: bold; /* Fette Schrift */
+	width: 100%; /* Genauso Breit wie div.bar */
+	text-align: center; /* Zentrierte Schrift */
+	text-shadow: 1px 1px 2px #FFF; /* Textschatten */
+}
+/* Im Label soll Text (Beschreibung) und die Input-Elemente gruppiert werden */
+label
+{
+	display: block;
+	margin: 10px 0;
+	width: 300px;
+	position: relative;
+	height: 30px;
+	color: #888;
+	font-weight: bold;
+}
+/* Die Input Elemente sollen Rechts ausgerichtet werden */
+input
+{
+	position: absolute;
+	right: 0;
+}
+/* Button Design festlegen */
+button
+{
+	padding: 5px 10px 6px;
+	color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border: 0;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+	background: -o-linear-gradient(top, #e62727, #cf2525);
+	background: -ms-linear-gradient(top, #e62727, #cf2525);
+	background: -webkit-linear-gradient(top, #e62727, #cf2525);
+	background: -moz-linear-gradient(top, #e62727, #cf2525);
+	background: linear-gradient(top, #e62727, #cf2525);
+}
+/* Was ist wenn der Button disabled ist?! */
+button:disabled, button:disabled:hover
+{
+	cursor: default;
+	background: -o-linear-gradient(top, #bbccbb, #ccddcc);
+	background: -moz-linear-gradient(top, #bbccbb, #ccddcc);
+	background: -webkit-linear-gradient(top, #bbccbb, #ccddcc);
+	background: -ms-linear-gradient(top, #bbccbb, #ccddcc);
+	background: linear-gradient(top, #bbccbb, #ccddcc);
+}
+/* Beim Drüberfahren soll der Button sich verändern */
+button:hover
+{
+	background: -o-linear-gradient(top, #ff5c00, #d45500);
+	background: -moz-linear-gradient(top, #ff5c00, #d45500);
+	background: -webkit-linear-gradient(top, #ff5c00, #d45500);
+	background: -ms-linear-gradient(top, #ff5c00, #d45500);
+	background: linear-gradient(top, #ff5c00, #d45500);
+}
+</style>
+</head>
+<body>
+<div id="container"></div>
+<div id="controls">
+<label>Wert<input type="number" min="1" id="value" value="100" /></label>
+<label>Text<input type="text" id="text" /></label>
+<label>Anfügen<input type="checkbox" id="append" /></label>
+<label>Farbe<input type="color" value="#FF0000" id="color" /></label>
+<label><button type="button" id="insert">Einfügen</button></label>
+</div>
+<footer>&copy; <address style="display: inline;">Florian Rappl</address>. Zuletzt aktualisiert am <time datetime="2011-11-27T12:54Z" style="display: inline;">27.11.2011 um 13:54</time></footer>
+<script src="jquery-1.7.2.min.js"></script>
+<script>
+$(document).ready(function() {
+	/* Merken uns die vorherigen Werte */
+	var values = [];
+	/* Zur Zeit maximaler Wert */
+	var hmax = 0;
+
+	/* Funktionalität des Insert-Buttons setzen */
+	$('#insert').click(function() {
+		
+		var bars = $('.bar'); /* Wählt alle Bars aus */
+		var text = $('#text').val(); /* Holt den Text */
+		var color = $('#color').val(); /* Holt die Farbe */
+		var height = $('#value').val() * 1; /* Holt den Wert */
+		
+		if(bars.length === 0 || !$('#append').attr('checked')) { /* Wir müssen einen neuen Balken kreieren */
+			values.push(height); //Hinzufügen zu den Werten
+			
+			if(height > hmax) //wenn die Höhe Größe ist als die Maximale Höhe dann ...
+				hmax = height; //Merken!
+			
+			var realheight = $('<div/>') //Erstellt das Element
+				.addClass('bar') //Hängt die Klasse an
+				.text(text) //Fügt den Text ein
+				.css('background', color) //Legt die Farbe fest
+				.appendTo('#container') //Hängt das Element an
+				.height(); //Gibt die Höhe zurück (das ist nun die in CSS voreingestellt Höhe)
+			
+			$('.bar').each(function(i,v) { //Geht über alle bisherigen Balken drüber
+				var newheight = Math.floor(realheight * values[i] / hmax); //Legt die neue Größe fest (wenn sich überhaupt was geändert hat)
+				var ratio = newheight / $(v).height(); //Rechnet das Verhältnis Neue Höhe / Alte Höhe aus (bei Keiner Änderung ist dies 1.0 ansonsten wird dies kleiner als 1.0 sein!)
+				var bottom = 0; //Merker für den neuen Abstand (der Kindelemente)
+				
+				$(v).height(newheight).children().each(function(j,w) { //Geht über alle Kindelemente dieses Balkens drüber
+					var cnh = Math.floor(ratio * $(w).height()); // Berechnet neue Größe des Kindelements
+					
+					$(w)
+						.css('bottom', bottom) //Legt neuen Abstand nach unten fest
+						.height(cnh); //Legt neue Größe fest
+						
+					bottom += cnh; //Erhöht Merker für Abstand nach unten (für nächstes Kindelement)
+				});
+			});
+		}
+		else { /* Wir hängen einen Balken an */
+			var ratio = Math.floor(bars.eq(-1).height() * height / values[values.length - 1]);
+			var bottom = 0; //Abstand nach unten
+			bars.eq(-1).children().each(function(i,v) { bottom += $(v).height(); }); // Rechnet aus wieviel Abstand nach unten sein muss
+			
+			$('<div/>')//Erstellt das Element
+				.addClass('append') //Hängt Klasse an
+				.text(text) //Setzt den Text
+				.css('background', color) //Setzt die Farbe
+				.css('bottom', bottom) //Setzt den Abstand nach unten
+				.height(ratio) //Legt die Höhe fest
+				.appendTo(bars.eq(-1));//Hängt das Element an
+		}		
+		
+	}).attr('disabled', 'disabled'); /* Setzen am Anfang aus disabled */
+	
+	/* Textchanged Event setzen */
+	$('#text').change(function() {
+		if(this.value) /* Es wurde Text eingegeben - nicht disablen ! */
+			$('#insert').removeAttr('disabled');
+		else /* Kein Text eingegeben - disablen */
+			$('#insert').attr('disabled', 'disabled');
+	});
+});
+</script>
+</body>
+</html>

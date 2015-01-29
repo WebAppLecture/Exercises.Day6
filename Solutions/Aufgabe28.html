@@ -1,0 +1,104 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<title>Lösung zur 28. Aufgabe</title>
+<style>
+html
+{
+	height: 100%;
+	overflow: hidden;
+}
+body
+{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	font-family: "Consolas", "Andale Mono", "Lucida Console", "Courier New", monospace;
+	font-size: 14px;
+	background: -o-linear-gradient(top, #AE0, #EA0);
+	background: -ms-linear-gradient(top, #AE0, #EA0);
+	background: -moz-linear-gradient(top, #AE0, #EA0);
+	background: -webkit-linear-gradient(top, #AE0, #EA0);
+	background: linear-gradient(top, #AE0, #EA0);
+	overflow: auto;
+}
+h1
+{
+	margin: 20px auto;
+	padding-left: 200px;
+	width: 400px;
+}
+label
+{
+	display: inline-block;
+	margin-right: 10px;
+	width: 190px;
+	font-weight: bold;
+	text-align: right;
+}
+p
+{
+	margin: 20px 0;
+}
+input
+{
+	width: 300px;
+	height: 24px;
+	box-sizing: content-box;
+	border-radius: 10px;
+	padding: 2px 10px;
+	border: 1px solid #CCC;
+	font-family: Arial, Tahoma, Helvetica, non-serif;
+	font-size: 14px;
+}
+input[required]
+{
+	background: rgba(255, 20, 20, 0.1);
+	border-color: #777;
+}
+button
+{
+	margin-left: 200px;
+	border: 0;
+	border-bottom: 1px solid #000;
+	border-radius: 5px;
+	background: -o-linear-gradient(bottom right, #F00, #00F);
+	background: -ms-linear-gradient(bottom right, #F00, #00F);
+	background: -moz-linear-gradient(bottom right, #F00, #00F);
+	background: -webkit-linear-gradient(bottom right, #F00, #00F);
+	background: linear-gradient(bottom right, #F00, #00F);
+	color: white;
+	font-weight: bold;
+	height: 30px;
+	font-family: "Consolas", "Andale Mono", "Lucida Console", "Courier New", monospace;
+	font-size: 14px;
+	box-shadow: 0 2px 2px #666;
+}
+form
+{
+	margin: 20px auto;
+	width: 600px;
+	border: 1px dashed #FFF;
+	border-left: 0;
+	border-right: 0;
+}
+</style>
+</head>
+<body>
+<h1>Benutzerregistrierung</h1>
+<form onforminput="" name="reg" />
+<p><label>Name</label><input type="text" pattern="[a-zA-Z\-]+,\s?[a-zA-Z]+" required name="name" autofocus /></p>
+<p><label>E-Mail</label><input type="email" required name="email" /></p>
+<p><label>Telefonnummer</label><input type="tel" name="phone" pattern="\+[0-9]{2}\s?\([0-9]{3}\)\s?[0-9]{4,}" /></p>
+<p><label>Geburtsdatum</label><input type="date" name="birthday" required /></p>
+<p><label>Leistungspunkte</label><input type="range" min=0 max=180 name="credits" /></p>
+<p><label>Eigene Homepage</label><input type="url" name="homepage" /></p>
+<p><label>Passwort festlegen</label><input type="password" name="pwd" required /></p>
+<p><label>Passwort bestätigen</label><input type="password" name="confirm" required /></p>
+<p><button type="submit">Registrieren</button></p>
+</form>
+<footer>&copy; <address style="display: inline;">Florian Rappl</address>. Zuletzt aktualisiert am <time datetime="2011-12-03T12:56Z" style="display: inline;">03.12.2011 um 13:56</time></footer>
+</body>
+</html>
