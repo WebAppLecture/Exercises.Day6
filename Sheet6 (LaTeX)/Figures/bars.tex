@@ -1,0 +1,98 @@
+\begin{figure}[!h]
+\centering
+    \begin{tikzpicture}
+        \newlength{\myheight}
+        \newlength{\mywidth}
+        \definecolor{myred}{RGB}{192,80,77}
+        \definecolor{myorange}{RGB}{247,150,70}
+        \definecolor{myblue}{RGB}{79,129,189}
+        
+        % % %Linker Text
+            \node at (-3.2,3) [right,text width=3cm] {\small
+                Höhe $h_a$ von {\tt div.append}:
+                    \[
+                    H = h_a \times h_i / h,
+                    \]
+                $H$ ist echte Höhe von {\tt div.bar},
+                $h_i$ die eingegebene Höhe und
+                $h$ die eingegebene Höhe von {\tt div.bar}.
+                };
+            
+        % % %Erster Balken
+            \setlength{\myheight}{6.05cm}
+            \setlength{\mywidth}{1.875cm}
+            %Grundbalken
+            \draw [dotted] (0,0) rectangle (\mywidth,\myheight);
+            
+            %Farbige Balken
+            \draw [fill,myred] (0,0) rectangle (\mywidth,0.45 * \myheight);
+            \draw [fill,myorange] (0,.45 * \myheight) rectangle (\mywidth,\myheight*.7);
+            
+            %Labels
+            \node at (\mywidth / 2, \myheight - .75cm) {\bfseries Text};
+            \node at (\mywidth / 2, \myheight*.575 + .25cm) [white] {\bfseries Text};
+            \node at (\mywidth / 2, \myheight*.575 - .25cm) [white] {\footnotesize \tt
+            div.append};
+            \node at (\mywidth / 2, \myheight*.2125 + .25cm) [white] {\bfseries Text};
+            \node at (\mywidth / 2, \myheight*.2125 - .25cm) [white] {\footnotesize \tt
+            div.append};
+            \node at (\mywidth / 2, -.5) {\tt div.bar};
+            
+            %Decoration
+            \draw [thick, decorate,decoration={brace,amplitude=3pt, raise=3pt}]
+            (0,.45*\myheight)
+            -- (0,.7*\myheight);
+            
+        % % %Pointer "Farbe"
+            \node (Farbe) at (\mywidth + 1cm, \myheight) {\small Farbe};
+            \draw [->] (Farbe.south west) -- (\mywidth - 9,.7*\myheight -9);
+            
+        % % %Zweiter Balken
+            \begin{scope}[xshift = \mywidth + .5cm]
+            \setlength{\myheight}{5cm}
+            
+            %Grundbalken
+            \draw [dotted] (0,0) rectangle (\mywidth,\myheight);
+            
+            %Farbige Balken
+            \draw [fill,myblue] (0,0) rectangle (\mywidth,0.75 * \myheight);
+            
+            %Labels
+            \node at (\mywidth / 2, \myheight - .75cm) {\bfseries Text};
+            \node at (\mywidth / 2, \myheight*.375 + .25cm) [white] {\bfseries Text};
+            \node at (\mywidth / 2, \myheight*.375 - .25cm) [white] {\footnotesize \tt
+            div.append};
+            \node at (\mywidth / 2, -.5) {\tt div.bar};
+            \end{scope}
+            
+        % % %Dritter Balken
+            \begin{scope}[xshift = \mywidth*2 + 1cm]
+            \setlength{\myheight}{5.5cm}
+            
+            %Grundbalken
+            \draw [dotted] (0,0) rectangle (\mywidth,\myheight);
+            
+            %Labels
+            \node at (\mywidth / 2, \myheight - .75cm) {\bfseries Text};
+            \node at (\mywidth / 2, -.5) {\tt div.bar};
+            
+            %Decoration
+            \draw [thick,decorate,decoration={mirror,brace,amplitude=3pt, raise=3pt}]
+            (\mywidth,0)
+            -- ++(0,\myheight);
+            
+        % % %Rechter Text
+            \node at (\mywidth*3,3) [left,text width=3cm] {\small
+                Höhe $h_b$ von {\tt div.bar} (ist immer relativ zu allen anderen {\tt
+                div.bar}) mit:
+                \[
+                h_b = H \times h_i / h_{max},
+                \]
+                $H$ ist vorgeschriebene feste Höhe
+                $h_i$ eingegebene Höhe und
+                $h_{max}$ maximal eingegebene Höhe.
+            };
+        
+        \end{scope}
+    \end{tikzpicture}
+\end{figure} 
