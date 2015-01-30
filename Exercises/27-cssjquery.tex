@@ -1,0 +1,23 @@
+\Exercise{jQuery und CSS}
+%
+\par Erstellen Sie eine einfache Webseite mit der man durch die Eingabeelemente
+Wert (größer $0$, \jvar{number}), Text (String, \jvar{text}), Anfügen (Ja /
+Nein, \jvar{checkbox}) und Farbe (String, \jvar{color}) einfache
+Balkendiagramme aufbauen kann. Außerdem sollte zusätzlich ein Button
+(``Einfügen'') existieren.
+%
+\input{Exercises/Figures/bars.tex}
+%
+\par Das Prinzip sollte folgendes sein: jQuery erstellt beim Klicken auf
+Einfügen ein neues \htag{div}, welches entweder eine Klasse \jvar{append} oder
+eine Klasse \jvar{bar} erhält. Auf der Seite sollte folgendes entstehen:
+
+\par Es muss also im Stylesheet ein Grundstyle von \jvar{div.bar}, sowie
+\jvar{div.append}, Elementen festgelegt werden. Außerdem empfiehlt es sich alle
+\jvar{div.bar} in einem anderen Container (z.B. \jvar{div.container}) zu
+sammeln.
+%
+\par Die Aufgabe von jQuery (neben der Erstellung und Platzierung von
+Elementen) besteht darin, ihnen die CSS Eigenschaften (z.B. Hintergrundfarbe,
+Höhe, ...) mitzugeben und die Einstellungen von bereits existierenden Elementen
+zu verändern (z.B. die relative Höhe von \jvar{div.bar} Elementen).
